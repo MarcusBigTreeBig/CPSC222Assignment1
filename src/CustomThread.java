@@ -12,10 +12,14 @@ public class CustomThread extends Thread {
         }
         threadID = nextID++;
     }
-    public void run () {
-        System.out.println("Thread ID: " + threadID + "\nTimes run:\n");
-        for (int i = 0; i < nextID-1; i++) {
-            System.out.println(i + ": " + timesRun[i]);
+    public synchronized void run () {
+        while (true) {
+            String str = "Thread ID: " + threadID + "\n" + "Times Run:\n";
+            for (int i = 0; i < nextID; i++) {
+                str += i + ": " + timesRun[i] + "\n";
+            }
+            System.out.println(str);
+            timesRun[threadID]++;
         }
     }
 
