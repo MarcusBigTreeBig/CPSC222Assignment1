@@ -1,5 +1,5 @@
-public class CustomLock {
-    public CustomLock acquire() {
+public class CustomBasicLock {
+    public CustomBasicLock acquire() {
         return null;
     }
     public void release () {}
