@@ -1,11 +1,21 @@
 public class CustomBasicLock {
-
-    public CustomBasicLock acquire() {
-        return null;
+    private boolean unlocked;
+    public CustomBasicLock () {
+        unlocked = true;
     }
-    public void release () {}
-    public boolean canAcquire(){
-        return false;
+    public synchronized CustomBasicLock acquire() throws InterruptedException {
+        while (!unlocked) {
+            this.wait();
+        }
+        unlocked = false;
+        return this;
+    }
+    public synchronized void release () {
+        unlocked = true;
+        notifyAll();
+    }
+    public synchronized boolean canAcquire(){
+        return unlocked;
     }
 
 }
