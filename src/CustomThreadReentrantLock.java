@@ -1,9 +1,9 @@
-public class CustomThreadBasicLock extends Thread{
+public class CustomThreadReentrantLock extends Thread{
     private static int[] timesRun = new int[10];
     private static int nextID = 0;
     private int threadID;
-    CustomBasicLock lock;
-    public CustomThreadBasicLock(CustomBasicLock lock) {
+    CustomReentrantLock lock;
+    public CustomThreadReentrantLock(CustomReentrantLock lock) {
         if (nextID > timesRun.length-1) {//ensuring array stays at a good size
             int[] temp = timesRun;
             timesRun = new int[temp.length*2];
@@ -19,7 +19,7 @@ public class CustomThreadBasicLock extends Thread{
     public void run () {
         while (true) {
             try {
-                lock = lock.acquire(this);
+                lock.acquire(this);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -32,6 +32,11 @@ public class CustomThreadBasicLock extends Thread{
             str += "Sum:" + sum + "\n";
             System.out.println(str);
             timesRun[threadID]++;
+            try {
+                lock.acquire(this);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             lock.release(this);
         }
     }
