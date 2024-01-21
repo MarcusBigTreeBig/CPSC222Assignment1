@@ -12,12 +12,17 @@ public class CustomThread extends Thread {
         }
         threadID = nextID++;
     }
-    public synchronized void run () {
+
+    @Override
+    public void run () {
         while (true) {
             String str = "Thread ID: " + threadID + "\n" + "Times Run:\n";
+            int sum = 0;
             for (int i = 0; i < nextID; i++) {
                 str += i + ": " + timesRun[i] + "\n";
+                sum += timesRun[i];
             }
+            str += "Sum:" + sum + "\n";
             System.out.println(str);
             timesRun[threadID]++;
         }

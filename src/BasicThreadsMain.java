@@ -4,6 +4,7 @@ public class BasicThreadsMain {
         CustomThread[] threads = new CustomThread[n];
         for (int i = 0; i < n; i++) {
             threads[i] = new CustomThread();
+            threads[i].start();
         }
     }
 }
