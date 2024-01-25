@@ -15,3 +15,23 @@ public class ReentrantMain {
         }
     }
 }
+
+/*
+Some Output:
+
+Thread 0 reacquires the lock before releasing each time, so it is the only one to have run, as shown by this data
+
+Thread ID: 0
+Times Run:
+0: 384810
+1: 0
+2: 0
+3: 0
+4: 0
+5: 0
+6: 0
+7: 0
+8: 0
+9: 0
+Sum:384810
+ */
