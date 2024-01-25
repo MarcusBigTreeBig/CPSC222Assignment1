@@ -1,8 +1,18 @@
+/**
+ * This thread prints out how many times each thread has run
+ * It uses a non reentrant lock to ensure it prints correct values
+ */
 public class CustomThreadBasicLock extends Thread{
     private static int[] timesRun = new int[10];
     private static int nextID = 0;
     private int threadID;
     CustomBasicLock lock;
+
+    /**
+     * Creates a thread that has a lock it will only run if it has acquired
+     *
+     * @param lock the lock that's being used by the threads
+     */
     public CustomThreadBasicLock(CustomBasicLock lock) {
         if (nextID > timesRun.length-1) {//ensuring array stays at a good size
             int[] temp = timesRun;
@@ -15,6 +25,10 @@ public class CustomThreadBasicLock extends Thread{
         this.lock = lock;
     }
 
+    /**
+     * If it has acquired the lock,
+     * It prints out how many times each thread has run
+     */
     @Override
     public void run () {
         while (true) {

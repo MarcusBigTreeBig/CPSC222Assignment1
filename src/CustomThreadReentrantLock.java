@@ -1,8 +1,19 @@
+/**
+ * This thread prints how many times each thread has run
+ * Uses locks to ensure correct values are printed
+ * Uses a reentrant lock, and the first thread will reenter before releasing everytime, so only it runs
+ */
 public class CustomThreadReentrantLock extends Thread{
     private static int[] timesRun = new int[10];
     private static int nextID = 0;
     private int threadID;
     CustomReentrantLock lock;
+
+    /**
+     * Creates the thread
+     *
+     * @param lock the lock that the threads are using
+     */
     public CustomThreadReentrantLock(CustomReentrantLock lock) {
         if (nextID > timesRun.length-1) {//ensuring array stays at a good size
             int[] temp = timesRun;
@@ -15,6 +26,10 @@ public class CustomThreadReentrantLock extends Thread{
         this.lock = lock;
     }
 
+    /**
+     * Prints out how many times each thread has run
+     * To demonstrate reentrant locks, lock is always reacquired, so only one thread will run
+     */
     @Override
     public void run () {
         while (true) {
